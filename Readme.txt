@@ -1,1 +1,1 @@
-Waterfront educational media
+Waterfront educational media.
