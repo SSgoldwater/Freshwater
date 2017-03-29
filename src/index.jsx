@@ -1,13 +1,4 @@
-console.log('Hello Freshwater');
-import React from 'react';
 import {render} from 'react-dom';
+import FWRouter from './utils/Router';
 
-class App extends React.Component {
-  render () {
-    return (
-      <p>Hello Freshwater!</p>
-    );
-  }
-}
-
-render(<App/>, document.getElementById('app'));
+render(FWRouter, document.getElementById('app'));
