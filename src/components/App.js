@@ -1,14 +1,18 @@
 import React from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navigation from './layout/Navigation';
 
-export default React.createClass({
+class App extends React.Component {
   render () {
-    console.log(this.props.children)
     return (
-      <div>
-        <Navigation/>
-        {this.props.children}
-      </div>
+      <MuiThemeProvider>
+        <div>
+          <Navigation/>
+          {this.props.children}
+        </div>
+      </MuiThemeProvider>
     );
   }
-});
+};
+
+export default App;
