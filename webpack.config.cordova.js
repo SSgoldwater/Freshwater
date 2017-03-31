@@ -1,12 +1,12 @@
 var webpack = require('webpack');
 var path = require('path');
 
-var BUILD_DIR = path.resolve(__dirname, 'build');
+var BUILD_DIR = path.resolve(__dirname, 'fwcordova/www/js/');
 var APP_DIR = path.resolve(__dirname, 'src');
 
 var config = {
   entry: APP_DIR + '/index.jsx',
-  devtool: 'eval',
+  devtool: 'eval-source-map',
   output: {
     path: BUILD_DIR,
     filename: 'bundle.js'
