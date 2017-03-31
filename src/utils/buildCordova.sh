@@ -2,7 +2,7 @@
 
 ./node_modules/.bin/webpack -d -p --config webpack.config.cordova.js
 
-INDEX="./fwcordova/www/js/index.js"
+INDEX="./Cordova/www/js/index.js"
 
 rm -rf $INDEX
 
@@ -28,5 +28,5 @@ app.initialize();
 "
 
 echo $FILE_PREFIX > $INDEX
-cat ./fwcordova/www/js/bundle.js >> $INDEX
+cat ./Cordova/www/js/bundle.js >> $INDEX
 echo $FILE_SUFFIX >> $INDEX
