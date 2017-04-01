@@ -19,6 +19,11 @@ var config = {
         loader : 'babel-loader'
       }
     ]
+  },
+  node: {
+    fs: "empty",
+    tls: "empty",
+    net: "empty"
   }
 };
 
