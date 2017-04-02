@@ -5,6 +5,7 @@ import Main from '../components/main/Main';
 import WaterDash from '../components/waterdash/WaterDash';
 import ToDo from '../components/todo/ToDo';
 import Rewards from '../components/rewards/Rewards';
+import Login from '../components/layout/Login';
 
 const FWRouter = (
   <Router>
@@ -14,6 +15,7 @@ const FWRouter = (
       <Route path="/todo" component={ ToDo }/>
       <Route path="/waterdash" component={ WaterDash }/>
       <Route path="/rewards" component={ Rewards }/>
+      <Route path="/login" component={ Login }/>
     </div>
   </Router>
 );
