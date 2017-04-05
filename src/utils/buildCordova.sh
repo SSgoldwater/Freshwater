@@ -22,7 +22,7 @@ var app = {\n
 
 FILE_SUFFIX="
     }\n
-  },\n\n
+  }\n\n
 
 app.initialize();
 "
