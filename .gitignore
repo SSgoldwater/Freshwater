@@ -2,4 +2,5 @@ build/bundle.js
 build/bundle.js.map
 node_modules
 npm-debug.log
-fwcordova/www/js/
+Cordova/platforms/
+Cordova/www/js/*

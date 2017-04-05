@@ -2,9 +2,9 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var precipitation = express();
 var router = express.Router();
-var pg = require('pg')
-
+var pg = require('pg');
 var client = new pg.Client({ database: "freshwater_dev" });
+;
 
 router.get('/users', function(req, res) {
   client.connect(function(err) {
