@@ -98,8 +98,7 @@ class Navigation extends React.Component {
   }
 
   _logout = () => {
-    const _this = this;
-
+    this.setState({ userMenuOpen: false });
     this.state.fb.logout((res) => {
       AuthStore.setUser({
         id: null,
