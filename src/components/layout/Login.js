@@ -2,6 +2,7 @@ import React from 'react';
 import FBLogin from '../../assets/FBLogin.png';
 import facebookbox from '../../assets/facebook-box.png';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 import { Link, Redirect } from 'react-router-dom';
 import AuthActions from '../../actions/AuthActions';
 import AuthStore from '../../stores/AuthStore';
@@ -104,21 +105,19 @@ class Login extends React.Component {
     } else {
       return (
         <div style={ styles.container }>
-          <RaisedButton 
-            labelColor={ "#ffffff" }
-            backgroundColor={ "#3B5998" }
-            label={ "Login with Facebook" }
-            icon={ <img src={ facebookbox }/> }
-            onTouchTap={ this.fbLogin }
-          />
-          <RaisedButton 
-            labelColor={ "#ffffff" }
-            backgroundColor={ "#3B5998" }
-            label={ "Logout" }
-            icon={ <img src={ facebookbox }/> }
-            onTouchTap={ this.fbLogout }
-          />
-          <p>{ this.state.user.name }</p>
+          <Paper
+            zDepth={ 3 }
+            style={ styles.loginPanel }
+          >
+            <RaisedButton 
+              style={ styles.facebookButton }
+              labelColor={ "#ffffff" }
+              backgroundColor={ "#3B5998" }
+              label={ "Login with Facebook" }
+              icon={ <img src={ facebookbox }/> }
+              onTouchTap={ this.fbLogin }
+            />
+          </Paper>
         </div>
       )
     }
