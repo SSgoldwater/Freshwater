@@ -7,7 +7,13 @@ const AppActions = {
       type: AppConstants.SET_PLATFORM,
       platform: platform
     });
-  }
+  },
+  setFB: (fb) => {
+    AppDispatcher.dispatch({
+      type: AppConstants.SET_FB,
+      fb: fb
+    });
+  },
 }
 
 export default AppActions;

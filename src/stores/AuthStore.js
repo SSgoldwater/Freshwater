@@ -34,6 +34,7 @@ class AuthStore extends EventEmitter {
 
   setUser = (user) => {
     this._currentUser = user;
+    this.emitChange();
   }
 }
 
@@ -43,7 +44,6 @@ _AuthStore.dispatchToken = AppDispatcher.register((payload) => {
   switch (payload.type) {
     case AuthConstants.SET_USER:
       _AuthStore.setUser(payload.userData);
-      _AuthStore.emitChange();
       break;
     default:
   }

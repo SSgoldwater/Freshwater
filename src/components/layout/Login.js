@@ -25,16 +25,7 @@ class Login extends React.Component {
 
   componentDidMount() {
     AuthStore.addChangeListener(this._onChange);
-
-    let _fb;
-    if (AppStore.getPlatform() == "system") {
-      _fb = FB;
-    } else {
-      console.log('setting connect plugin');
-      _fb = facebookConnectPlugin;
-    }
-
-    this.setState({ fb: _fb });
+    this._setFB();
   };
 
   componentWillUnmount() {
@@ -46,46 +37,47 @@ class Login extends React.Component {
     this.setState({ user: _user });
   }
 
-  _getUser() {
-    console.log('getUser');
-    const _loginCB = (res) => { 
-      console.log('loginSuccess');
-      const _token = res.authResponse.accessToken;
-      const _id = res.authResponse.userID;
-      this.state.fb.api('/me', ['public_profile'], (res) => {
-        console.log('get /me success');
-        const _name = res.name;
-        this.state.fb.api('/me?fields=picture', ['public_profile'], (res) => {
-          console.log('get /me/picture success');
-          console.log(res);
-          const _picUrl = res.picture.data.url;
-          console.log(_id, _token, _name);
-
-          AuthActions.setUser({
-            id: _id,
-            token: _token,
-            name: _name,
-            picUrl: _picUrl 
-          });
-        });
-      });
-    };
-
-    if (AppStore.getPlatform() == "system") {
-      this.state.fb.login(_loginCB);
+  _setFB = () => {
+    if (AppStore.getFB() == null) {
+      setTimeout(() => { this._setFB() }, 50);
     } else {
-      this.state.fb.login(["public_profile"], _loginCB);
+      this.setState({ fb: AppStore.getFB() });
     }
   }
 
+  _loginCB = (res) => { 
+    const _token = res.authResponse.accessToken;
+    const _id = res.authResponse.userID;
+    this.state.fb.api('/me', ['public_profile'], (res) => {
+      const _name = res.name;
+      this.state.fb.api('/me?fields=picture', ['public_profile'], (res) => {
+        const _picUrl = res.picture.data.url;
+
+        AuthActions.setUser({
+          id: _id,
+          token: _token,
+          name: _name,
+          picUrl: _picUrl 
+        });
+      });
+    });
+  };
+
+  _getUser() {
+    if (AppStore.getPlatform() == "system") {
+      this.state.fb.login(this._loginCB);
+    } else {
+      this.state.fb.login(["public_profile"], this._loginCB);
+    }
+  }
 
   fbLogin = () => {
     const _this = this;
     this.state.fb.getLoginStatus((response) => {
-      console.log('response = ' + response.status);
       if (response.status === 'connected') {
         let uid = response.authResponse.userID;
         let accessToken = response.authResponse.accessToken;
+        _this._loginCB(response);
       } else if (response.status === 'not_authorized') {
         // the user is logged in to Facebook, 
         // but has not authenticated your app
@@ -99,7 +91,6 @@ class Login extends React.Component {
     this.state.fb.getLoginStatus((response) => {
       if (response.status === 'connected') {
         this.state.fb.logout((res) => {
-          console.log('Logout res: ', res);
         });
       }
     });

@@ -9,6 +9,7 @@ class AppStore extends EventEmitter {
     super(props);
 
     this._platform = null;
+    this._fb = null;
   }
 
   emitChange = () => {
@@ -24,13 +25,19 @@ class AppStore extends EventEmitter {
   }
 
   getPlatform = () => {
-    console.log('getPlatform');
     return this._platform;
   }
 
   setPlatform = (platform) => {
-    console.log('setPlatform');
     this._platform = platform;
+  }
+
+  getFB = () => {
+    return this._fb;
+  }
+
+  setFB = (fb) => {
+    this._fb = fb;
   }
 }
 
@@ -40,6 +47,10 @@ _AppStore.disptachToken = AppDispatcher.register((payload) => {
   switch (payload.type) {
     case AppConstants.SET_PLATFORM:
       _AppStore.setPlatform(payload.platform);
+      _AppStore.emitChange();
+      break;
+    case AppConstants.SET_FB:
+      _AppStore.setFB(payload.fb);
       _AppStore.emitChange();
       break;
     default:
